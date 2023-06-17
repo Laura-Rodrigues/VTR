@@ -1,0 +1,45 @@
+<?xml version="1.0" ?>
+<project name="Texture Model"  width="1000" height="1000">
+	<assets>
+		<scenes>
+			<scene name="teapot" param="UNITIZE SWAP_YZ">
+				<file name="../models/Teapot.3ds"/>
+				<!--file name="../metal_barrel/metal_barrel.obj"/-->
+			</scene>
+
+		</scenes>
+		
+		<viewports>
+			<viewport name="MainViewport">
+				<CLEAR_COLOR r="1.0" g="1.0" b="1.0" />
+			</viewport>
+		</viewports>
+		
+		<cameras>
+			<camera name="MainCamera" >
+				<viewport name="MainViewport" />
+				<POSITION x="0" y="0" z="3" />
+				<VIEW x="0" y="0" z="-1.0" />
+                <NEAR value="0.01" />
+			</camera>
+		</cameras>
+		
+		<materialLibs>
+			<materialLib filename="textureModel.mlib" />
+		</materialLibs>
+	</assets>
+	
+	<pipelines>
+		<pipeline name="textures" default="true">
+			<pass class="default" name="texture" >
+				<scenes>
+					<scene name="teapot" />
+				</scenes>
+				<camera name="MainCamera" />
+				<materialMaps>
+					<map fromMaterial="*" toMaterial="textured" toLibrary="Texture" />
+				</materialMaps>
+			</pass>
+		</pipeline>
+	</pipelines>
+</project>

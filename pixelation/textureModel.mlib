@@ -1,0 +1,38 @@
+<?xml version="1.0" ?>
+<materialLib name="Texture">
+
+	<textures>
+		<texture name="crate" filename="../textures/crate.jpg" mipmap="true" />
+		<texture name="teapot" filename="../textures/teapot.jpg" />
+		<texture name="earth" filename="../textures/earthDay.jpg" mipmap="true" />
+		<texture name="rust" filename="../metal_barrel/diffus_rust.png" mipmap="true" />
+	</textures>
+
+	<shaders>
+		<shader name="textured" 	vs = "shaders/texture.vert" 
+									ps = "shaders/texture.frag" />
+	</shaders>
+	
+	<materials>
+		<material name="textured">
+			<shader name="textured">
+				<values>
+					<valueof uniform="m_pvm" 
+							 type="RENDERER"  
+							 component="PROJECTION_VIEW_MODEL" />
+					 			 
+					<valueof uniform="tex"
+							 type="TEXTURE_BINDING"
+							 component="UNIT" id="0" />
+					<valueof uniform="tex2"
+							 type="TEXTURE_BINDING"
+							 component="UNIT" id="1" />
+				</values>
+			</shader>
+			<textures>
+				<texture name="teapot" UNIT = "0" />
+				<texture name="rust" UNIT = "1" />
+			</textures>
+		</material>
+	</materials>
+</materialLib>

@@ -5,3 +5,4 @@ NPR:
 - outlines | silhouettes 
 - rim lighting
 - pixelation
+- change between filters

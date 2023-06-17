@@ -2,6 +2,8 @@
 
 uniform vec4 l_dir; // world space
 uniform vec4 diffuse;
+uniform	vec4 specular;
+uniform	float shininess;
 uniform mat4 m_view;
 uniform int num_divisions;
 
@@ -20,16 +22,28 @@ void main (){
     vec3 l = normalize(vec3(m_view * - l_dir));
 
     float i = max(0.0, dot(l,nn));   
-    //float rimLightIntensity = dot(e, n);
-    //rimLightIntensity = 1.0 - rimLightIntensity;
-    //rimLightIntensity = max(0.0, rimLightIntensity);
-//
-//    //rimLightIntensity = smoothstep(0.3, 0.4, rimLightIntensity);
-//
-    //vec4 rimLight   = rimLightIntensity * diffuse;
+    float rimLightIntensity = dot(ee, n);
+    rimLightIntensity = 1.0 - rimLightIntensity;
+    rimLightIntensity = max(0.0, rimLightIntensity);
 
-    int num_divisions = 3;
-    float division = 1.0 / float(num_divisions);
+    rimLightIntensity = smoothstep(0.5, 0.6, rimLightIntensity);
+    vec4 rimLight   = rimLightIntensity * vec4(1.0, 0, 1.0, 1.0);
+
+    //int num_divisions = 3;
+    //float division = 1.0 / float(num_divisions);
+	
+    vec4 spec = vec4(0.0);
+
+	if (i > 0.0) {
+		// compute the half vector
+		vec3 h = normalize(l + ee);	
+		// compute the specular intensity
+		float intSpec = max(dot(h,n), 0.0);
+		// compute the specular term into spec
+		spec = specular * pow(intSpec,shininess);
+	}
+
+
 
 
     // floor to nearest division
@@ -37,5 +51,5 @@ void main (){
     else if (i >= 0.6) { i = 0.6; }
     else if (i >= 0.3) { i = 0.3; }
     else    { i = 0.0; }
-    color = i * diffuse;//+ rimLight;
+    color = i * diffuse + rimLight + spec;
 }
