@@ -39,10 +39,6 @@ void main()
 		fragCoord.y -= 256;
 	}
 
-	vec2 vUv = vec2( 10,30 );
-
-	vec4 color = vec4(0,0,0,1);
-
 
 
 
@@ -60,7 +56,7 @@ void main()
 
 
 	// weight math arithmetic from http://kylehalladay.com/blog/tutorial/2017/02/21/Pencil-Sketch-Effect.html
-	float lightIntensity = dot(vec3(diffuse, diffuse, diffuse), vec3(0.2326, 0.7152, 0.0722)) * 6;
+	float lightIntensity = dot(vec3(diffuse, diffuse, diffuse), vec3(0.2326, 0.7152, 0.0722)) * 7;
 	vec3 lightIntensity3 = vec3(lightIntensity, lightIntensity, lightIntensity);
 	vec3 weights0 = clamp(lightIntensity3 - vec3(0, 1, 2), 0.0, 1.0);
 	vec3 weights1 = clamp(lightIntensity3 - vec3(3, 4, 5), 0.0, 1.0);
@@ -79,7 +75,9 @@ void main()
 	hatchingColor += hatch2 * weights1.x;
 	hatchingColor += hatch1 * weights1.y;
 	hatchingColor += hatch0 * weights1.z;
-	//hatchingColor += hatch6 * weights2.x;
+	hatchingColor += hatch6 * weights2.x;
+	hatchingColor += hatch6 * weights2.y;
+	hatchingColor += hatch6 * weights2.z;
 
 	outColor = vec4(hatchingColor,1);
 }

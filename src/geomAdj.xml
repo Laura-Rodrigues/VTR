@@ -3,7 +3,7 @@
 	<assets>
 		<scenes>
 			<scene name="Al"  param="USE_ADJACENCY UNITIZE SWAP_YZ" >
-				<file name="models/Teapot.3ds"/>
+				<file name="models/T-Rex.obj"/>
 			</scene>
 
 		</scenes>

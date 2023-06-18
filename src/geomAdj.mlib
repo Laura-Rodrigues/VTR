@@ -7,7 +7,7 @@
 									gs="shaders/lineAdj2.geom"
 									vs="shaders/dirlightdiffambpix.vert" />
 
-		<shader name="toon" 		ps="shaders/hatching.frag" 
+		<shader name="toon" 		ps="shaders/hatch.frag" 
 									vs="shaders/hatching.vert" />									
 	</shaders>
 
