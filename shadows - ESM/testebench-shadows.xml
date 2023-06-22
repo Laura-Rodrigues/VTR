@@ -113,7 +113,7 @@
 					<map toMaterial="*">
 						<shader fromMaterial ="shadowed" fromLibrary="Shadow Materials" />
 						<textures>
-							<texture name="blurredXY" fromLibrary="Shadow Materials" toUnit=1>
+							<texture name="sobel" fromLibrary="Shadow Materials" toUnit=1>
 								<MIN_FILTER value="LINEAR" />
 								<MAG_FILTER value="LINEAR" />
 							</texture>
@@ -130,7 +130,7 @@
 			
 			<pass class="quad" name="showShadowMap">
 				<viewport name="SmallViewport1" />				
-				<texture name="exp" fromLibrary="Shadow Materials"/>
+				<texture name="blurredXY" fromLibrary="Shadow Materials"/>
 			</pass>
 			
 			<pass class="default" name="DebugViewFromGodsCamera">

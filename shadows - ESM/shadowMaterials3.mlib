@@ -27,7 +27,7 @@
 	<renderTarget name = "sobel">
 			<SIZE width=4096 height=4096 />
 			<colors>
-				<color name="sobel" internalFormat="RG32F" />
+				<color name="sobel" internalFormat="RGBA" />
 			</colors>
 		</renderTarget>
 
@@ -38,7 +38,6 @@
 				<color name="offscreenrender" internalFormat="RGBA" />
 			</colors>
 		</renderTarget>
-
 	</renderTargets>
 	
 	<shaders>
@@ -204,6 +203,5 @@
 				</texture>	
 			</textures>
 		</material>		
-		
 	</materials>
 </materialLib>

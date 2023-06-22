@@ -7,21 +7,40 @@ in vec2 texCoordV;
 uniform int width ;
 uniform int height;
 
-out vec2 color;
+out vec4 color;
 void make_kernel(inout vec4 n[9], sampler2D tex, vec2 coord)
 {
-	float w = 1.0 / width ;
-	float h = 1.0 / height;
+	float w = 1.0 / textureSize(moments,0).x;
+	float h = 1.0 / textureSize(moments,0).y;
+	float depth0 = texture(moments, coord + vec2( -w, -h)).x;
+	float depth1 = texture(moments, coord + vec2(0.0, -h)).x;
+	float depth2 = texture(moments, coord + vec2(  w, -h)).x;
+	float depth3 = texture(moments, coord + vec2( -w, 0.0)).x;
+	float depth4 = texture(moments, coord).x;
+	float depth5 = texture(moments, coord + vec2(  w, 0.0)).x;
+	float depth6 = texture(moments, coord + vec2( -w, h)).x;
+	float depth7 = texture(moments, coord + vec2(0.0, h)).x;
+	float depth8 = texture(moments, coord + vec2(  w, h)).x;
+	n[0] = vec4(depth0,depth0,depth0,1.0);
+	n[1] = vec4(depth1,depth1,depth1,1.0);
+	n[2] = vec4(depth2,depth2,depth2,1.0);
+	n[3] = vec4(depth3,depth3,depth3,1.0);
+	n[4] = vec4(depth4,depth4,depth4,1.0);
+	n[5] = vec4(depth5,depth5,depth5,1.0);
+	n[6] = vec4(depth6,depth6,depth6,1.0);
+	n[7] = vec4(depth7,depth7,depth7,1.0);
+	n[8] = vec4(depth8,depth8,depth8,1.0);
 
-	n[0] = texture2D(tex, coord + vec2( -w, -h));
-	n[1] = texture2D(tex, coord + vec2(0.0, -h));
-	n[2] = texture2D(tex, coord + vec2(  w, -h));
-	n[3] = texture2D(tex, coord + vec2( -w, 0.0));
-	n[4] = texture2D(tex, coord);
-	n[5] = texture2D(tex, coord + vec2(  w, 0.0));
-	n[6] = texture2D(tex, coord + vec2( -w, h));
-	n[7] = texture2D(tex, coord + vec2(0.0, h));
-	n[8] = texture2D(tex, coord + vec2(  w, h));
+
+	//n[0] = texture(tex, coord + vec2( -w, -h));
+	//n[1] = texture(tex, coord + vec2(0.0, -h));
+	//n[2] = texture(tex, coord + vec2(  w, -h));
+	//n[3] = texture(tex, coord + vec2( -w, 0.0));
+	//n[4] = texture(tex, coord);
+	//n[5] = texture(tex, coord + vec2(  w, 0.0));
+	//n[6] = texture(tex, coord + vec2( -w, h));
+	//n[7] = texture(tex, coord + vec2(0.0, h));
+	//n[8] = texture(tex, coord + vec2(  w, h));
 }
 
 void main(void) 
@@ -33,5 +52,5 @@ void main(void)
   	vec4 sobel_edge_v = n[0] + (2.0*n[1]) + n[2] - (n[6] + (2.0*n[7]) + n[8]);
 	vec4 sobel = sqrt((sobel_edge_h * sobel_edge_h) + (sobel_edge_v * sobel_edge_v));
 
-	color = vec2(sobel.x, sobel.y);
+	color = vec4(1- sobel.rgb,1.0 );
 }

@@ -28,21 +28,22 @@ void main()
 	// ambient term = shadowed	
 	color = diff * 0.25;
 	
-	vec3 n = normalize (normalV);
+	vec3 n = normalize(normalV);
 	
 	float NdotL = max(0.0,dot (n, lightDirV));
 	float expz = 0.0;
 
-	vec2 exp_ = vec2(0.0, 0.0);
+	vec4 exp_ = texture(blurredExp,texCoordV).rgba;
 	if (NdotL > 0.0) {
 		float lightDist = length(vec3(lightPosV - posV))/(far - near);
 		vec4 proj = projShadowCoordV / projShadowCoordV.w; 
-		exp_ = texture(blurredExp, proj.xy).rg;
+		//exp_ = texture(blurredExp, proj.xy).rgb;
 		expz = texture(blurredExp, proj.xy).x;
 		shadowTerm = exp(-k * (expz-lightDist) )  ;
 		shadowTerm = clamp(shadowTerm, 0 , 1) ;
 		color += diff  * NdotL * shadowTerm ;
 	}
 	
-	outColor = vec4(exp_,0, 1);
+	outColor = texture(blurredExp,texCoordV);
+	//outColor = texelFetch( blurredExp, ivec2(gl_FragCoord), 0 ).rgba;
 }
