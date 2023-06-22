@@ -14,17 +14,10 @@ uniform vec3 lightPosition;
 uniform mat4 m_view;
 uniform vec4 l_dir;
 
-
-
-//in vec3 vPosition;
 in vec3 Normal;
 in vec2 texCoord;
 
-//uniform float ambientWeight;
-//uniform float diffuseWeight;
 
-//uniform float specularWeight;
-//uniform float shininess;
 
 
 out vec4 outColor;
@@ -35,23 +28,10 @@ void main() {
     vec3 l = normalize(vec3(m_view * - l_dir));
     vec3 normal = normalize( Normal );
     
-    float diffuse = max(dot(l,normal), 0.0);
+    float i = max(dot(l,normal), 0.0);
     
-    float specular = 0.;
-    float ambient = 1.;
     vec3 n = normalize( Normal );
-    //vec3 r = -reflect(lightPosition, n);
-    //r = normalize(r);
-    //vec3 v = -vPosition.xyz;
-    //v = normalize(v);
-//
-    //float nDotHV = max( 0., dot( r, v ) );
-    //if( nDotVP != 0. ) specular = pow ( nDotHV, shininess );
 
-    
-
-    //float shading = ambientWeight * ambient + diffuseWeight * diffuse;// + specularWeight * specular;
-    float shading = diffuse;
 
     vec4 tex0 = texture(hatching0,texCoord);
     vec4 tex1 = texture(hatching1,texCoord);
@@ -62,26 +42,19 @@ void main() {
 
 
     float step = 1. / 6.;
-    if( shading <= step ){   
-        c = mix( tex5, tex4, 6. * shading );
-    }
-    if( shading > step && shading <= 2. * step ){
-        c = mix( tex4, tex3, 6. * ( shading - step ) );
-    }
-    if( shading > 2. * step && shading <= 3. * step ){
-        c = mix( tex3, tex2, 6. * ( shading - 2. * step ) );
-    }
-    if( shading > 3. * step && shading <= 4. * step ){
-        c = mix( tex2, tex1, 6. * ( shading - 3. * step ) );
-    }
-    if( shading > 4. * step && shading <= 5. * step ){
-        c = mix( tex1, tex0, 6. * ( shading - 4. * step ) );
-    }
-    if( shading > 5. * step ){
-        c = mix( tex0, vec4( 1. ), 6. * ( shading - 5. * step ) );
-    }
+    if( i <= step )
+        c = mix( tex5, tex4, 6. * i );
+    if( i > step && i <= 2. * step )
+        c = mix( tex4, tex3, 6. * ( i - step ) );
+    if( i > 2. * step && i <= 3. * step )
+        c = mix( tex3, tex2, 6. * ( i - 2. * step ) );
+    if( i > 3. * step && i <= 4. * step )
+        c = mix( tex2, tex1, 6. * ( i - 3. * step ) );
+    if( i > 4. * step && i <= 5. * step )
+        c = mix( tex1, tex0, 6. * ( i - 4. * step ) );
+    if( i > 5. * step )
+        c = mix( tex0, vec4( 1. ), 6. * ( i - 5. * step ) );
 
-    //vec4 src = mix( mix( inkColor, vec4( 1. ), c.r ), c, .5 );
     
     outColor = vec4( c.rgb, 1. );
 }

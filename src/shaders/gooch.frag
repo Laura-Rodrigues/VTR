@@ -31,8 +31,8 @@ void main()
     vec3 l = normalize(vec3(m_view * - l_dir));
 	float diff = max(dot(l,norm), 0.0);
 
-	vec3 finalCool = coolColor + alpha * objectColor;//diffuse;
-	vec3 finalWarm = warmColor + beta *  objectColor;//diffuse;
+	vec3 finalCool = coolColor + alpha * vec3(1);//diffuse;
+	vec3 finalWarm = warmColor + beta *  vec3(1);//diffuse;
 
 	float lerp = (1.0 + diff) / 2.0;
 
