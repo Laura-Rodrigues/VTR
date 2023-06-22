@@ -7,7 +7,6 @@ uniform	float shininess;
 uniform mat4 m_view;
 uniform int num_divisions;
 
-
 //uniform
 in vec3 n;
 in vec3 e;
@@ -26,11 +25,10 @@ void main (){
     rimLightIntensity = 1.0 - rimLightIntensity;
     rimLightIntensity = max(0.0, rimLightIntensity);
 
-    rimLightIntensity = smoothstep(0.5, 0.6, rimLightIntensity);
-    vec4 rimLight   = rimLightIntensity * vec4(1.0, 0, 1.0, 1.0);
+    rimLightIntensity = smoothstep(0.7, 0.8, rimLightIntensity);
+    vec4 rimLight   = rimLightIntensity * diffuse;
 
-    //int num_divisions = 3;
-    //float division = 1.0 / float(num_divisions);
+
 	
     vec4 spec = vec4(0.0);
 
@@ -43,13 +41,14 @@ void main (){
 		spec = specular * pow(intSpec,shininess);
 	}
 
-
+    float division = 1.0 / float(num_divisions);
+    i = ceil((i +0.00001) * num_divisions) * division;
 
 
     // floor to nearest division
-    if      (i >= 0.8) { i = 1.0; }
-    else if (i >= 0.6) { i = 0.6; }
-    else if (i >= 0.3) { i = 0.3; }
-    else    { i = 0.0; }
+    //if      (i >= 0.8) { i = 1.0; }
+    //else if (i >= 0.6) { i = 0.6; }
+    //else if (i >= 0.3) { i = 0.3; }
+    //else    { i = 0.0; }
     color = i * diffuse + rimLight + spec;
 }

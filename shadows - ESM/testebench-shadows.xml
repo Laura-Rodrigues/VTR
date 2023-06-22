@@ -84,10 +84,6 @@
 				</materialMaps>
 			</pass>
 
-			<pass class="quad" name="sobelPass" >
-				<renderTarget name="sobel" fromLibrary="Shadow Materials" />
-				<material name="sobelM" fromLibrary="Shadow Materials" />
-			</pass>
 			
 			<!--pass class="quad" name="blurrX" >
 				<renderTarget name="blurredX" fromLibrary="Shadow Materials" />
@@ -98,6 +94,12 @@
 				<renderTarget name="blurredXY" fromLibrary="Shadow Materials" />
 				<material name="blurY" fromLibrary="Shadow Materials" />
 			</pass-->
+
+			
+			<pass class="quad" name="sobelPass" >
+				<renderTarget name="sobel" fromLibrary="Shadow Materials" />
+				<material name="sobelM" fromLibrary="Shadow Materials" />
+			</pass>
 
 			<pass class="default" name="computeShadowsToRT">
 				<scenes>

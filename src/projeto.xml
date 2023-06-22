@@ -1,10 +1,17 @@
 <?xml version="1.0" ?>
 <project name="Simple" width="512" height="512">
 	<assets>
+	    <attributes>
+            <attribute name="num_divisions" type="RENDERER" data="INT" value="4" />
+            <attribute name="alpha" type="RENDERER" data="FLOAT" value="0.25" />
+            <attribute name="beta" type="RENDERER"  data="FLOAT" value="0.5" />
+
+		</attributes>
 		<scenes>
 			<scene name="Al"  param="USE_ADJACENCY UNITIZE SWAP_YZ" >
 				<file name="models/Teapot.3ds"/>
 			</scene>
+
 
 		</scenes>
 		<lights>
@@ -13,35 +20,28 @@
     	    </light>
     	</lights>
 		<viewports>
-			<viewport name="MainViewport">
-				<CLEAR_COLOR r="1.0" g="1.0" b="1.0" />
+			<viewport name="Viewport1">
 				<ORIGIN  x="0" y="0" />
 				<SIZE width=".33"  height="1" />
+				<CLEAR_COLOR r="1.0" g="1.0" b="1.0" />
 			</viewport>
-			<viewport name="SmallViewport1" >
+			<viewport name="Viewport2" >
 				<ORIGIN  x="0.33" y="0" />
 				<SIZE width=".33"  height="1" />
-				<CLEAR_COLOR  r="0.0" g="0.0" b="0.2" />
+				<CLEAR_COLOR r="1.0" g="1.0" b="1.0" />
 			</viewport>
 			
-			<viewport name="SmallViewport2" >
-				<ORIGIN x=".66" y="0.33" />
-				<SIZE width=".25"  height="0.33" />
-				<CLEAR_COLOR  r="0.0" g="0.0" b="0.2" />
+			<viewport name="Viewport3" >
+				<ORIGIN x=".659" y="0" />
+				<SIZE width=".33"  height="1" />
+				<CLEAR_COLOR r="1.0" g="1.0" b="1.0" />
 			</viewport>
-			
-			<viewport name="SmallViewport3" >
-				<ORIGIN x=".75" y="0" />
-				<SIZE width=".25"  height="0.33" />
-				<CLEAR_COLOR  r="0.0" g="0.0" b="0.2" />
-			</viewport>
+		
 		</viewports>
 
-		</viewports>
 		
 		<cameras>
-			<camera name="MainCamera" >
-				<viewport name="MainViewport" />
+			<camera name="MainCamera" >			
 				<projection TYPE="PERSPECTIVE" FOV=60.0 NEAR=0.1 FAR=100.0 />
 				<POSITION x=0 y=0.0 z=7.5 />
 				<VIEW x=0.0 y=0.0 z=-1.0 />
@@ -56,53 +56,124 @@
 	
 	<pipelines>
 		<pipeline name="fixedfunction" default="true">
-			<!--pass class="default" name="pass1" >
+			<pass class="default" name="pass1">
 				<scenes>
 					<scene name="Al" />
 				</scenes>
 				<camera name="MainCamera" />
-
-			</pass-->
-
-
-			<pass class="default" name="pass">
-				<scenes>
-					<scene name="Al" />
-				</scenes>
-				<camera name="MainCamera" />
+				<viewport name="Viewport1" />
 				<materialMaps>
 					<map fromMaterial="*" toLibrary="Geometry With Adjacency" toMaterial="showContours" />
 				</materialMaps>
 			</pass>
 			<pass class="default" name="pass2">
-				<DEPTH_CLEAR value=false />
-				<COLOR_CLEAR value=false />
-                <DEPTH_FUNC value="LEQUAL" />
 				<scenes>
 					<scene name="Al" />
 				</scenes>
 				<camera name="MainCamera" />
-				<!--injectionMaps>
+				<viewport name="Viewport2" />
+				<materialMaps>
+					<map fromMaterial="*" toLibrary="Geometry With Adjacency" toMaterial="showContours" />
+				</materialMaps>
+			</pass>
+
+			<pass class="default" name="pass3">
+				<scenes>
+					<scene name="Al" />
+				</scenes>
+				<camera name="MainCamera" />
+				<viewport name="Viewport3" />
+				<materialMaps>
+					<map fromMaterial="*" toLibrary="Geometry With Adjacency" toMaterial="showContours" />
+				</materialMaps>
+			</pass>
+			<pass class="default" name="passToon">
+				<COLOR_CLEAR value=false />
+				<DEPTH_CLEAR value=false />
+                <DEPTH_FUNC value="LEQUAL" />
+				<scenes>
+					<scene name="Al" />
+				</scenes>
+				<viewport name="Viewport1" />				
+				<camera name="MainCamera" />
+				<!--materialMaps>
+					<map fromMaterial="*" toMaterial="toon" toLibrary="Geometry With Adjacency" />
+				</materialMaps-->
+				<injectionMaps>
 					<map toMaterial="*" > 
                         <shader fromMaterial="toon" 
                                 fromLibrary="Geometry With Adjacency" 
                          />
                     </map>
-				</injectionMaps-->
-
-
-				<materialMaps>
-					<map fromMaterial="*" toMaterial="toon" toLibrary="Geometry With Adjacency" />
-				</materialMaps>
+				</injectionMaps>
 
 				<lights>
                     <light name="sun" />
                 </lights>
 			</pass>
 
+			<pass class="default" name="passGooch">
+				<COLOR_CLEAR value=false />
+				<DEPTH_CLEAR value=false />
+                <DEPTH_FUNC value="LEQUAL" />
+				<scenes>
+					<scene name="Al" />
+				</scenes>
+				<viewport name="Viewport2" />				
+				<camera name="MainCamera" />
+
+
+				<injectionMaps>
+					<map toMaterial="*" > 
+                        <shader fromMaterial="gooch" 
+                                fromLibrary="Geometry With Adjacency" 
+                         />
+                    </map>
+				</injectionMaps>
+
+				<lights>
+                    <light name="sun" />
+                </lights>
+			</pass>
+
+			
+			<pass class="default" name="passHatch">
+				<COLOR_CLEAR value=false />
+				<DEPTH_CLEAR value=false />
+                <DEPTH_FUNC value="LEQUAL" />
+				<scenes>
+					<scene name="Al" />
+				</scenes>
+				<viewport name="Viewport3" />				
+				<camera name="MainCamera" />
+				<!--injectionMaps>
+					<map toMaterial="*" > 
+                        <shader fromMaterial="hatch" 
+                                fromLibrary="Geometry With Adjacency" 
+                         />
+                    </map>
+				</injectionMaps-->
+
+				<materialMaps>
+					<map fromMaterial="*" toMaterial="hatch" toLibrary="Geometry With Adjacency" />
+				</materialMaps>
+				<lights>
+                    <light name="sun" />
+                </lights>
+			</pass>
 
 
 			
 		</pipeline>
 	</pipelines>
+	<interface>
+        <window label="Division settings" >
+            <var label="Num  Divisions" type="RENDERER" context="CURRENT" component="num_divisions" def="step=1 min=2 max=15" />
+        </window>
+
+		<window label="Color intensity settings" >
+            <var label="Alpha" type="RENDERER" context="CURRENT" component="alpha" def="step=0.1 min=0.1 max=0.5" />
+            <var label="Beta" type="RENDERER" context="CURRENT" component="beta" def="step=0.1 min=0.25 max=0.75" />
+        </window>
+    </interface>
 </project>

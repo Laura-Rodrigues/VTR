@@ -4,8 +4,6 @@ uniform sampler2D moments;
 
 in vec2 texCoordV;
 
-uniform int width ;
-uniform int height;
 
 out vec4 color;
 void make_kernel(inout vec4 n[9], sampler2D tex, vec2 coord)
@@ -13,6 +11,7 @@ void make_kernel(inout vec4 n[9], sampler2D tex, vec2 coord)
 	float w = 1.0 / textureSize(moments,0).x;
 	float h = 1.0 / textureSize(moments,0).y;
 	float depth0 = texture(moments, coord + vec2( -w, -h)).x;
+	n[0] = vec4(depth0,depth0,depth0,1.0);
 	float depth1 = texture(moments, coord + vec2(0.0, -h)).x;
 	float depth2 = texture(moments, coord + vec2(  w, -h)).x;
 	float depth3 = texture(moments, coord + vec2( -w, 0.0)).x;
@@ -21,7 +20,6 @@ void make_kernel(inout vec4 n[9], sampler2D tex, vec2 coord)
 	float depth6 = texture(moments, coord + vec2( -w, h)).x;
 	float depth7 = texture(moments, coord + vec2(0.0, h)).x;
 	float depth8 = texture(moments, coord + vec2(  w, h)).x;
-	n[0] = vec4(depth0,depth0,depth0,1.0);
 	n[1] = vec4(depth1,depth1,depth1,1.0);
 	n[2] = vec4(depth2,depth2,depth2,1.0);
 	n[3] = vec4(depth3,depth3,depth3,1.0);

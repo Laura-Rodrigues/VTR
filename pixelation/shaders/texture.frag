@@ -1,4 +1,4 @@
-#version 430
+#version 330
 
 
 
@@ -47,7 +47,12 @@ void main(void)
     else
     {
 
-  		int pixelSize = 9;
+  		int pixelSize = 7;
+		//float width = textureSize(texCoord,0).x;
+		//float height = textureSize(texCoord,0).x;
+
+
+
 
 		vec2 screenSize = vec2(width, height);
 

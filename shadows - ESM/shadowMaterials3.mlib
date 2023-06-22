@@ -24,7 +24,7 @@
 			</colors>
 		</renderTarget>
 
-	<renderTarget name = "sobel">
+		<renderTarget name = "sobel">
 			<SIZE width=4096 height=4096 />
 			<colors>
 				<color name="sobel" internalFormat="RGBA" />
@@ -176,7 +176,7 @@
 														component="TS05_PVM_MATRIX" />
 														
 					<valueof uniform="blurredExp"	type="TEXTURE_BINDING" context="CURRENT" 
-														id=1 
+														id="1" 
 														component="UNIT" />	
 														
 					<valueof uniform="texCount"			type="RENDERER" context="CURRENT" 

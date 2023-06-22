@@ -6,6 +6,8 @@ uniform sampler2D hatching2;
 uniform sampler2D hatching3;
 uniform sampler2D hatching4;
 uniform sampler2D hatching5;
+uniform sampler2D tex;
+
 
 uniform vec3 lightPosition;
 
