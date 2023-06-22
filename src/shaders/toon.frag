@@ -6,6 +6,7 @@ uniform	vec4 specular;
 uniform	float shininess;
 uniform mat4 m_view;
 uniform int num_divisions;
+uniform float rimLight;
 
 //uniform
 in vec3 n;
@@ -25,7 +26,7 @@ void main (){
     rimLightIntensity = 1.0 - rimLightIntensity;
     rimLightIntensity = max(0.0, rimLightIntensity);
 
-    rimLightIntensity = smoothstep(0.7, 0.8, rimLightIntensity);
+    rimLightIntensity = smoothstep(rimLight, rimLight+0.1, rimLightIntensity);
     vec4 rimLight   = rimLightIntensity * vec4(1.0, 0, 0, 1.0);
 
 

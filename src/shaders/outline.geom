@@ -58,7 +58,6 @@ vec4 interpolation(int p0, int p1, float t){
 	vec3 N243 = cross(ps[4] - ps[2], ps[3] - ps[2]);
 	vec3 N405 = cross(ps[0] - ps[4], ps[5] - ps[4]);
 
-	float offset = 0.2;
 	float dotView = dot(N042, c);
 	if (dotView < 0.0){
 		dotView = dot(N021, c2);

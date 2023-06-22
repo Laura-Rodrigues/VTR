@@ -5,11 +5,12 @@
             <attribute name="num_divisions" type="RENDERER" data="INT" value="4" />
             <attribute name="alpha" type="RENDERER" data="FLOAT" value="0.25" />
             <attribute name="beta" type="RENDERER"  data="FLOAT" value="0.5" />
+            <attribute name="rimLight" type="RENDERER"  data="FLOAT" value="0.7" />
 
 		</attributes>
 		<scenes>
 			<scene name="Al"  param="USE_ADJACENCY UNITIZE SWAP_YZ" >
-				<file name="models/Teapot.3ds"/>
+				<file name="models/bunny.obj"/>
 			</scene>
 
 
@@ -169,6 +170,8 @@
 	<interface>
         <window label="Division settings" >
             <var label="Num  Divisions" type="RENDERER" context="CURRENT" component="num_divisions" def="step=1 min=2 max=15" />
+            <var label="Rim Light" type="RENDERER" context="CURRENT" component="rimLight" def="step=0.1 min=0 max=0.9" />
+
         </window>
 
 		<window label="Color intensity settings" >

@@ -94,6 +94,9 @@
 
 					<valueof uniform="num_divisions" 
                         type="RENDERER" component="num_divisions" />
+
+					<valueof uniform="rimLight" 
+                        type="RENDERER" component="rimLight" />
 				</values>
 			</shader>
 		</material>

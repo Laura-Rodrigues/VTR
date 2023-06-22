@@ -49,7 +49,7 @@ void main(void)
 
   		int pixelSize = 9;
 
-		vec2 screenSize = vec2(width, height);
+		//vec2 screenSize = vec2(width, height);
 
   		float x = int(gl_FragCoord.x) % pixelSize;
   		float y = int(gl_FragCoord.y) % pixelSize;
@@ -61,7 +61,7 @@ void main(void)
     	y = gl_FragCoord.y + y;
 
   		vec2 uv = vec2(x, y) / texSize;
-		
+
 		color = texture(tex, texCoord + uv);
 		//vec2 newUV = floor(uv * screenSize / pixelSize) / screenSize * pixelSize;
 
