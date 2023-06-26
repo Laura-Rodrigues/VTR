@@ -1,29 +1,21 @@
 #version 460
 
-
-
 uniform mat4 m_view;
 uniform vec4 l_dir;
 uniform vec3 coolColor = vec3(0.0f, 0.0f, 0.8f);
 uniform vec3 warmColor = vec3(0.4f, 0.4f, 0.0f);
-uniform vec3 iuse;
 uniform	vec4 specular;
 uniform	float shininess;
 uniform float alpha = 0.25;
 uniform float beta = 0.5;
-
-
-
 
 in vec3 n;
 in vec3 e;
 
 out vec4 outColor;
 
-void main()
-{
+void main() {
 
-    vec3 objectColor = vec3(1);
     vec3 ee = normalize(e);
 	vec3 norm = normalize(n);
 
@@ -31,20 +23,15 @@ void main()
     vec3 l = normalize(vec3(m_view * - l_dir));
 	float i = max(dot(l,norm), 0.0);
 
-	vec3 finalCool = coolColor + alpha * vec3(1);//iuse;
-	vec3 finalWarm = warmColor + beta *  vec3(1);//iuse;
+	vec3 finalCool = coolColor + alpha * vec3(1);
+	vec3 finalWarm = warmColor + beta *  vec3(1);
 
 	float lerp = (1.0 + i) / 2.0;
 
 	finalCool = (1 - lerp) * finalCool;
 	finalWarm = lerp * finalWarm;
 
-
-
     vec4 spec = vec4(0.0);
-
-
-
 	if (i > 0.0) {
 		// compute the half vector
 		vec3 h = normalize(l + e);	
