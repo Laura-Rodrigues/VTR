@@ -42,11 +42,6 @@ void main() {
 		//spec= vec4(shininess,shininess,shininess, 1.0);
 	}
 
-
-
-	//outColor = vec4(finalCool + finalWarm + vec3(spec), 1.0);
 	outColor = vec4(finalCool + finalWarm, 1.0) + spec;
-	
-	//normalOut = vec4(Normal, 1.0);
-	//depthOut = vec4(FragPos.z, FragPos.z, FragPos.z, 1.0);
+
 }
