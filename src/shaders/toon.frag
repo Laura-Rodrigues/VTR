@@ -27,7 +27,7 @@ void main (){
     rimLightIntensity = max(0.0, rimLightIntensity);
 
     rimLightIntensity = smoothstep(rimLight, rimLight+0.1, rimLightIntensity);
-    vec4 rimLight   = rimLightIntensity * vec4(1.0, 0, 0, 1.0);
+    vec4 rimLight   = rimLightIntensity * diffuse;
 
 
 	

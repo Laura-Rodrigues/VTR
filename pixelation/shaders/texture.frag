@@ -63,6 +63,9 @@ void main(void)
   		vec2 uv = vec2(x, y) / texSize;
 
 		color = texture(tex, texCoord + uv);
+		//color = texelFetch(tex, vec2(gl_FragCoord.xy) + uv, 0);
+
+  		//vec2 uv = gl_FragCoord.xy / screenSize;
 		//vec2 newUV = floor(uv * screenSize / pixelSize) / screenSize * pixelSize;
 
   		//colorOut = texture(tex, uv);

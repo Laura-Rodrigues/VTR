@@ -6,7 +6,7 @@ uniform mat4 m_view;
 uniform vec4 l_dir;
 uniform vec3 coolColor = vec3(0.0f, 0.0f, 0.8f);
 uniform vec3 warmColor = vec3(0.4f, 0.4f, 0.0f);
-uniform vec3 diffuse;
+uniform vec3 iuse;
 uniform	vec4 specular;
 uniform	float shininess;
 uniform float alpha = 0.25;
@@ -29,12 +29,12 @@ void main()
 
 	// if angle between norm and lightDir > 90 degrees, dot product is neg
     vec3 l = normalize(vec3(m_view * - l_dir));
-	float diff = max(dot(l,norm), 0.0);
+	float i = max(dot(l,norm), 0.0);
 
-	vec3 finalCool = coolColor + alpha * vec3(1);//diffuse;
-	vec3 finalWarm = warmColor + beta *  vec3(1);//diffuse;
+	vec3 finalCool = coolColor + alpha * vec3(1);//iuse;
+	vec3 finalWarm = warmColor + beta *  vec3(1);//iuse;
 
-	float lerp = (1.0 + diff) / 2.0;
+	float lerp = (1.0 + i) / 2.0;
 
 	finalCool = (1 - lerp) * finalCool;
 	finalWarm = lerp * finalWarm;
@@ -45,7 +45,7 @@ void main()
 
 
 
-	if (diff > 0.0) {
+	if (i > 0.0) {
 		// compute the half vector
 		vec3 h = normalize(l + e);	
 		// compute the specular intensity
