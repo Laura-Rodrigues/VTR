@@ -14,7 +14,6 @@ out vec4 colorOut;
 void main(void) {
 
   	vec2 texSize  = textureSize(tex, 0).xy;
-    vec4 currentColor = texture(tex, texCoord);
 
 	vec4 color = vec4(1.0, 0.0, 0.0, 1.0);
     
